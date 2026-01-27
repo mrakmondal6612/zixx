@@ -1,0 +1,59 @@
+const nodemailer = require('nodemailer');
+
+const SMTP_HOST = process.env.SMTP_HOST;
+const SMTP_PORT = Number(process.env.SMTP_PORT || 587);
+const SMTP_SECURE = SMTP_PORT === 465; // common convention
+
+const transporter = nodemailer.createTransport({
+  host: SMTP_HOST,
+  port: SMTP_PORT,
+  secure: SMTP_SECURE,
+  auth: process.env.SMTP_USER && process.env.SMTP_PASS ? {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  } : undefined,
+});
+
+function resolveFromAddress() {
+  const brand = process.env.SMTP_FROM_NAME || process.env.BRAND_NAME || 'Zixx';
+  const raw = process.env.SMTP_FROM_EMAIL || process.env.SMTP_FROM || 'no-reply@zixx.app';
+  // If already in "Name <email@domain>" format, keep as-is
+  if (/<.+>/.test(raw)) return raw;
+  return `${brand} <${raw}>`;
+}
+
+async function sendEmail(to, subject, text, html) {
+  if (!to) return;
+  const from = resolveFromAddress();
+  try {
+    await transporter.sendMail({ from, to, subject, text, html });
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+async function sendOrderReceipt(to, order) {
+  if (!to) return;
+  const from = resolveFromAddress();
+  const subject = `Your Zixx order ${order._id} receipt`;
+  const amount = order?.paymentDetails?.paymentAmount || order.totalAmount;
+  const items = (order.orderItems || []).map(it => `${it.productName} x${it.quantity} - ₹${it.totalPrice}`).join('\n');
+  const text = `Thank you for your purchase!\n\nOrder ID: ${order._id}\nAmount: ₹${amount}\nStatus: ${order.paymentStatus}\n\nItems:\n${items}\n\nWe appreciate your business.`;
+  const html = `
+    <div>
+      <h2>Thank you for your purchase!</h2>
+      <p><strong>Order ID:</strong> ${order._id}</p>
+      <p><strong>Amount:</strong> ₹${amount}</p>
+      <p><strong>Status:</strong> ${order.paymentStatus}</p>
+      <h3>Items</h3>
+      <ul>${(order.orderItems || []).map(it => `<li>${it.productName} x${it.quantity} - ₹${it.totalPrice}</li>`).join('')}</ul>
+    </div>
+  `;
+  try {
+    await transporter.sendMail({ from, to, subject, text, html });
+  } catch (e) {
+  }
+}
+
+module.exports = { sendOrderReceipt, sendEmail };

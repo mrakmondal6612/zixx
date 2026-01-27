@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+/* Theme-based CSS for production reliability */
+:root {
+  --theme-transition: all 0.3s ease;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #191F45;
+  --bg-secondary: #21295c;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+}
+
+[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f0f0f0;
+  --text-primary: #000000;
+  --text-secondary: #666666;
+}
+
+.theme-dark {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  transition: var(--theme-transition);
+}
+
+.theme-light {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  transition: var(--theme-transition);
+}
+
+/* Sidebar custom styles */
+.MuiDrawer-paper {
+  background: linear-gradient(135deg, #232946 0%, #394867 100%);
+  color: #fff;
+  border-right: 2px solid #232946;
+  box-shadow: 2px 0 16px 0 rgba(35,41,70,0.12);
+}
+
+.MuiListItemButton-root {
+  border-radius: 8px;
+  margin: 0 8px;
+  transition: background 0.2s, color 0.2s;
+}
+.MuiListItemButton-root:hover {
+  background: #21295c !important;
+  color: #fff !important;
+}
+.Mui-selected, .MuiListItemButton-root.Mui-selected {
+  background: #f9bc60 !important;
+  color: #232946 !important;
+}
+.MuiListItemIcon-root {
+  color: #cfcfcf;
+}
+.MuiListItemButton-root.Mui-selected .MuiListItemIcon-root,
+.MuiListItemButton-root:hover .MuiListItemIcon-root {
+  color: #232946 !important;
+}
+
+/* Sidebar section headings */
+.MuiTypography-root {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  color: #f4f4f4;
+}
+
+/* Profile section at the bottom */
+.sidebar-profile-section {
+  /* background: rgba(35, 41, 70, 0.9); */
+  border-radius: 12px;
+  margin: 0 16px 16px 16px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(35,41,70,0.08);
+}
+
+/* Sync button style */
+.sidebar-profile-section .MuiButton-root {
+  background: #f9bc60;
+  color: #232946;
+  font-weight: 700;
+  border-radius: 6px;
+  box-shadow: none;
+  transition: background 0.2s;
+}
+.sidebar-profile-section .MuiButton-root:hover {
+  background: #f7c873;
+}
+
+
+html,
+body,
+#root,
+.app {
+  height: 100%;
+  width: 100%;
+  font-family: "Inter", sans-serif;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #7a7f9d;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #21295c;
+}
+
+/* Handle on Hover */
+::-webkit-scrollbar-track:hover {
+  background: #21295c;
+}
