@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Logout Sync</title>
+    <meta name="robots" content="noindex,nofollow" />
+  </head>
+  <body>
+    <script>
+      (function(){
+        try { localStorage.setItem('auth_logout', String(Date.now())); } catch (e) {}
+        try {
+          var bc = new BroadcastChannel('auth');
+          bc.postMessage({ type: 'logout' });
+          bc.close();
+        } catch (e) {}
+        try { window.dispatchEvent(new CustomEvent('auth:logout')); } catch (e) {}
+      })();
+    </script>
+    <noscript>Logout sync</noscript>
+  </body>
+</html>

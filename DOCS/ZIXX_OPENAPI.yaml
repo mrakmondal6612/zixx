@@ -1,0 +1,215 @@
+openapi: 3.0.3
+info:
+  title: Zixx API (skeleton)
+  version: 1.0.0
+  description: Compact OpenAPI skeleton for the main Zixx routes. Fill with concrete schemas and examples as needed.
+
+servers:
+  - url: http://localhost:8282/api
+    description: Local backend server (adjust PORT as needed)
+
+paths:
+  /clients/auth/register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                phone:
+                  type: string
+      responses:
+        "200":
+          description: Registration successful
+
+  /clients/auth/login:
+    post:
+      summary: Login user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Login successful; returns access token
+
+  /clients/products:
+    get:
+      summary: List products (supports filters & pagination)
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: Search query
+        - in: query
+          name: page
+          schema:
+            type: integer
+        - in: query
+          name: limit
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Product list
+
+  /clients/products/{id}:
+    get:
+      summary: Get product details
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Product object
+
+  /clients/cart:
+    post:
+      summary: Add item(s) to cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      productId:
+                        type: string
+                      quantity:
+                        type: integer
+      responses:
+        "200":
+          description: Cart updated
+
+  /clients/orders:
+    post:
+      summary: Create an order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                orderItems:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      productId:
+                        type: string
+                      quantity:
+                        type: integer
+                      price:
+                        type: number
+                shippingAddress:
+                  type: string
+                paymentMethod:
+                  type: string
+                totalAmount:
+                  type: number
+      responses:
+        "201":
+          description: Order created
+
+  /clients/payments/razorpay/webhook:
+    post:
+      summary: Razorpay webhook endpoint (raw body expected)
+      description: Verify signature using RAZORPAY_WEBHOOK_SECRET
+      responses:
+        "200":
+          description: Webhook received
+
+  /admin/products:
+    get:
+      summary: Admin - list products (requires admin auth)
+      responses:
+        "200":
+          description: Product list
+    post:
+      summary: Admin - create product
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                price:
+                  type: number
+                images:
+                  type: string
+                  format: binary
+      responses:
+        "201":
+          description: Product created
+
+  /admin/orders:
+    get:
+      summary: Admin - list orders
+      responses:
+        "200":
+          description: Orders list
+
+  /admin/orders/{id}/refund:
+    post:
+      summary: Admin - refund an order
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+      responses:
+        "200":
+          description: Refund processed (subject to payment provider)
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []

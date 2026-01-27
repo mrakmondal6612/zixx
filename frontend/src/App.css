@@ -1,0 +1,332 @@
+
+/* Global app styling with enhanced responsive design */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Responsive container for the entire app */
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Enhanced responsive layout */
+.main-layout {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive header adjustments */
+.header-responsive {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: white;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+/* Responsive main content */
+.main-content {
+  flex: 1;
+  width: 100%;
+  padding: 0.75rem;
+}
+
+@media (min-width: 475px) {
+  .main-content {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .main-content {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .main-content {
+    padding: 2.5rem;
+  }
+}
+
+/* Responsive footer */
+.footer-responsive {
+  width: 100%;
+  margin-top: auto;
+  background-color: hsl(var(--muted));
+  border-top: 1px solid hsl(var(--border));
+}
+
+/* Enhanced button responsiveness */
+.responsive-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  font-size: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  min-height: 2rem;
+}
+
+@media (min-width: 475px) {
+  .responsive-button {
+    font-size: 0.875rem;
+    padding: 0.625rem 1rem;
+    min-height: 2.25rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .responsive-button {
+    font-size: 0.875rem;
+    padding: 0.75rem 1.25rem;
+    min-height: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-button {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    min-height: 2.75rem;
+  }
+}
+
+/* Enhanced form responsiveness */
+.responsive-form-container {
+  width: 100%;
+  max-width: 28rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+@media (min-width: 640px) {
+  .responsive-form-container {
+    max-width: 32rem;
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-form-container {
+    max-width: 36rem;
+    padding: 2rem;
+  }
+}
+
+/* Enhanced card responsiveness */
+.responsive-card-container {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1fr;
+  padding: 0.75rem;
+}
+
+@media (min-width: 475px) {
+  .responsive-card-container {
+    gap: 1rem;
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .responsive-card-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    padding: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-card-container {
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-card-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .responsive-card-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Enhanced image responsiveness */
+.responsive-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0.375rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.responsive-image:hover {
+  transform: scale(1.02);
+}
+
+@media (min-width: 768px) {
+  .responsive-image:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* Enhanced navigation responsiveness */
+.responsive-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .responsive-nav {
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-nav {
+    gap: 1.5rem;
+    padding: 1.25rem;
+  }
+}
+
+/* Touch-friendly sizing for mobile */
+@media (max-width: 639px) {
+  .touch-friendly {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .touch-friendly-text {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .high-contrast {
+    border: 2px solid;
+    background-color: white;
+    color: black;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (orientation: landscape) and (max-height: 640px) {
+  .landscape-mobile {
+    padding: 0.5rem;
+  }
+  
+  .landscape-mobile .responsive-heading {
+    font-size: 1.25rem;
+  }
+}
+
+/* Animation preferences */
+@media (prefers-reduced-motion: no-preference) {
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Focus styles for accessibility */
+.focus-visible:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Selection styles */
+::selection {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
+
+/* Loading states */
+.loading-skeleton {
+  background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted-foreground)) 50%, hsl(var(--muted)) 75%);
+  background-size: 200% 100%;
+  animation: loading 2s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Error states */
+.error-state {
+  color: hsl(var(--destructive));
+  border-color: hsl(var(--destructive));
+}
+
+/* Success states */
+.success-state {
+  color: rgb(34 197 94);
+  border-color: rgb(34 197 94);
+}

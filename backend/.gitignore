@@ -1,0 +1,24 @@
+# Environment files
+.env
+.env.*
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Optional init data for development
+init/dummy-data/
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
